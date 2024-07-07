@@ -2,6 +2,13 @@ require 'rails_helper'
 RSpec.describe Note, type: :model do
 
   #  the code in before will run prior to all tests inside the "search message for a term" block, but not before other examples outside of the new describe block
+
+  it "generates associated data from a factory" do
+    note = FactoryBot.create(:note)
+    puts "This is the project id: #{note.project.id}"
+    puts "This is the user id: #{note.user.id}"
+  end
+
   before(:each) do 
     @user = User.create(
       first_name: "Joe",
