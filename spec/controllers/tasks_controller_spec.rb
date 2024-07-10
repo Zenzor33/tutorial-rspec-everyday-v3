@@ -7,9 +7,7 @@ RSpec.describe TasksController, type: :controller do
   #   @task = @project.tasks.create!(name: "Test task")
   # end
   
-  let(:user) { FactoryBot.create(:user) }
-  let(:project) { FactoryBot.create(:project, owner: user) } 
-  let(:task) { project.tasks.create!(name: "Test task") }
+  include_context "project setup"
 
   describe "#show" do
     it "responds with JSON formatted output" do
@@ -18,6 +16,9 @@ RSpec.describe TasksController, type: :controller do
         params: { project_id: project.id, id: task.id }
       # expect(response.content_type).to eq "application/json"
       expect(response.content_type).to include("application/json")
+      
+      # # Unable to make the custom matchers work correctly
+      # expect(response).to have_content_type(:json)
     end
   end
 
